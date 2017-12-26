@@ -165,6 +165,7 @@ Result:
 > db.aurora_il.aggregate({"$match":{"cuisine":{"$exists":1}}},{"$group":{"_id":"$cuisine","count":{"$sum":1}}},{"$sort":{"count": -1}}, {"$limit":10})
 
 Result:
+'''
 { "_id" : "burger", "count" : 67 }
 { "_id" : "pizza", "count" : 36 }
 { "_id" : "mexican", "count" : 35 }
@@ -175,6 +176,7 @@ Result:
 { "_id" : "italian", "count" : 12 }
 { "_id" : "ice_cream", "count" : 11 }
 { "_id" : "chicken", "count" : 9 }
+'''
 ### Different Types of Cuisine:
 > db.aurora_il.distinct("cuisine").length
 
@@ -253,11 +255,7 @@ if __name__ == '__main__':
 
 ## 5. Other Ideas About the Data Set:
 
-The data set could be improved by making bulk inputted data easier to filter out. Bots and automatic data dumps are very present in the data set as can be seen above. Elements from National Hydrography Dataset (NHD) were dumped in this case mainly by alexrudd(NHD) but only discovered after close investigation. Also, Topologically Integrated Geographic Encoding and Referencing data (tiger) data is spread throughout the data set. (See below for queries). While this data is important to some, it takes away the importance of user inputted data. I think focusing on user-inputted data, and highlighting its existence would help improve the data.
-
-Some of the benefits from focusing on user-inputted data would be that there is a 'human in the loop' when tagging nodes. Lots of the automated data dumps are unvalidated. Taken directly from the OpenSteet Map Wiki, "An initial run took place in 2005, but unfortunately had to be shut off, and data purged, in November 2006 due to data integrity problems." This shows how damaging automated data dumps can be to openly contributed data sources. Introducing a 'human in the loop' would help limit this corruption. However on the other hand, focusing on user-inputted data would mean higher levels of inconsistency when it comes to the XML structure. There are ways to limit this, but ultimately user data is dirty. With that being said though, dirty human data is easier to correct than damaging data dumps en-masse.
-
-
+The data set could be improved by making bulk inputted data easier to filter out. Bots and automatic data dumps are very present in the data set as can be seen above. Elements from National Hydrography Dataset (NHD) were dumped in this case mainly by alexrudd(NHD) but only discovered after close investigation. Also, Topologically Integrated Geographic Encoding and Referencing data (tiger) data is spread throughout the data set. (See below for queries). While this data is important to some, it takes away the importance of user inputted data. I think focusing on user inputted data, and highlighting its existence would help improve the data.
 
 
 > db.aurora_il.find({"NHD:way_id":{"$exists":1}}).count()
@@ -268,6 +266,17 @@ Result:
 
 Result:
 14335
+
+
+Some of the benefits from focusing on user inputted data would be that there is a 'human in the loop' when tagging nodes. Lots of the automated data dumps are unvalidated. This is taken directly from the OpenSteet Map Wiki regarding TIGER data, "An initial run took place in 2005, but unfortunately had to be shut off, and data purged, in November 2006 due to data integrity problems." This shows how damaging automated data dumps can be to openly contributed data sources. Introducing a 'human in the loop' would help limit this corruption. Additionally, highlighting user inputted data would make contributing more valuable. The overwhelming amount of automated data masks the efforts made by individual contributers of the data set. By adding some sort of weight or relevance to the user data, you could more easily highlight who the frequent individual contributers are which is difficult to do as it stands now. 
+
+The lack of user inputted data also show one of the flaws of a community based data source. Although OpenStreetMap is awesome, there is little incentivisation to tag map data. By providing incentives to the user base, OSM could help stimulate interest in tagging data. For example, OSM could build in a community leaderboard for tagging data. 
+
+Some of the flaws of focusing on user inputted data would include higher levels of inconsistencies and errors in the XML structure. While user inputted data would validate the data is substantiated in at least some sense, it would ultimately succumb to the vulnerabilities of human nature. There certainly could be ways to mitigate the 'dirtiness' that comes with user inputted data, but chances are the data would end up be flawed in some dimension. This shows while autmated data dumps can be harmful, they do at a minimum provide consistent data structure. 
+
+If user input could be filtered in a consistent manner(which is certainly possible!), highlighting it would definitely help improve the OSM data set. It would make user generated input more valuable and therefore more meaningful to the users to add it. Additionally, it would help validate OSM tags. OpenStreetMap data is still recovering from some major automated dumps in the past because the data was not validated on input.
+
+
 ## 6. Conclusion:
 
 After extensively looking through the OpenStreetMap data, I have fonud how much of it is inputted by automatic methods. I would like to see more light shed on the user-inputted part of the data set. Although this data set is extremely large, there are obviously still room for improvement when it comes to maintaing consistency of the data set.
