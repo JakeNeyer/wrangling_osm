@@ -134,10 +134,11 @@ data = process_map('aurora_il.osm', True)
 ## 4. Overview of Data
 
 ### Size of Files:
-
+```
 >aurora_il.osm : 169.9 MB
 
 >aurora_il.osm.json : 220.6 MB
+```
 ### Number of Unique Users:
 > db.aurora_il.distinct('created.user').length
 
