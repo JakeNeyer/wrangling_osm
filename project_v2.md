@@ -140,16 +140,19 @@ data = process_map('aurora_il.osm', True)
 >aurora_il.osm.json : 220.6 MB
 ```
 ### Number of Unique Users:
+```
 > db.aurora_il.distinct('created.user').length
 
 Result:
 796
+```
 
 ### Number of Nodes:
 > db.aurora_il.find({"type":"node"}).count()
-
+```
 Result:
 801984
+```
 ### Number of Ways:
 > db.aurora_il.find({"type":"way"}).count()
 
