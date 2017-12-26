@@ -165,7 +165,7 @@ Result:
 > db.aurora_il.aggregate({"$match":{"cuisine":{"$exists":1}}},{"$group":{"_id":"$cuisine","count":{"$sum":1}}},{"$sort":{"count": -1}}, {"$limit":10})
 
 Result:
-'''
+```
 { "_id" : "burger", "count" : 67 }
 { "_id" : "pizza", "count" : 36 }
 { "_id" : "mexican", "count" : 35 }
@@ -176,7 +176,7 @@ Result:
 { "_id" : "italian", "count" : 12 }
 { "_id" : "ice_cream", "count" : 11 }
 { "_id" : "chicken", "count" : 9 }
-'''
+```
 ### Different Types of Cuisine:
 > db.aurora_il.distinct("cuisine").length
 
