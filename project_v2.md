@@ -135,9 +135,9 @@ data = process_map('aurora_il.osm', True)
 
 ### Size of Files:
 ```
->aurora_il.osm : 169.9 MB
+aurora_il.osm : 169.9 MB
 
->aurora_il.osm.json : 220.6 MB
+aurora_il.osm.json : 220.6 MB
 ```
 ### Number of Unique Users:
 ```
@@ -148,28 +148,34 @@ Result:
 ```
 
 ### Number of Nodes:
-> db.aurora_il.find({"type":"node"}).count()
 ```
+> db.aurora_il.find({"type":"node"}).count()
+
 Result:
 801984
 ```
 ### Number of Ways:
+```
 > db.aurora_il.find({"type":"way"}).count()
 
 Result:
 74256
+```
 ## Exploring More of the Data:
 
 ### Number of Restaurants:
+```
 > db.aurora_il.find({"amenity": "restaurant"}).count()
 
 Result:
 332 
+```
 ### Top Ten Cuisines:
+```
 > db.aurora_il.aggregate({"$match":{"cuisine":{"$exists":1}}},{"$group":{"_id":"$cuisine","count":{"$sum":1}}},{"$sort":{"count": -1}}, {"$limit":10})
 
 Result:
-```
+
 { "_id" : "burger", "count" : 67 }
 { "_id" : "pizza", "count" : 36 }
 { "_id" : "mexican", "count" : 35 }
@@ -182,11 +188,12 @@ Result:
 { "_id" : "chicken", "count" : 9 }
 ```
 ### Different Types of Cuisine:
+```
 > db.aurora_il.distinct("cuisine").length
 
 Result:
 48
-
+```
 ## Data Statistics:
 
 The top user 'Umbugbene' makes up 31.8% of all the entries in the data set. Here is the detailed breakdown of the users and their contributions: 
@@ -261,16 +268,18 @@ if __name__ == '__main__':
 
 The data set could be improved by making bulk inputted data easier to filter out. Bots and automatic data dumps are very present in the data set as can be seen above. Elements from National Hydrography Dataset (NHD) were dumped in this case mainly by alexrudd(NHD) but only discovered after close investigation. Also, Topologically Integrated Geographic Encoding and Referencing data (tiger) data is spread throughout the data set. (See below for queries). While this data is important to some, it takes away the importance of user inputted data. I think focusing on user inputted data, and highlighting its existence would help improve the data.
 
-
+```
 > db.aurora_il.find({"NHD:way_id":{"$exists":1}}).count()
 
 Result:
 815
+```
+```
 > db.aurora_il.find({"tiger:reviewed":{"$exists":1}}).count()
 
 Result:
 14335
-
+```
 
 Some of the benefits from focusing on user inputted data would be that there is a 'human in the loop' when tagging nodes. Lots of the automated data dumps are unvalidated. This is taken directly from the OpenSteet Map Wiki regarding TIGER data, "An initial run took place in 2005, but unfortunately had to be shut off, and data purged, in November 2006 due to data integrity problems." This shows how damaging automated data dumps can be to openly contributed data sources. Introducing a 'human in the loop' would help limit this corruption. Additionally, highlighting user inputted data would make contributing more valuable. The overwhelming amount of automated data masks the efforts made by individual contributers of the data set. By adding some sort of weight or relevance to the user data, you could more easily highlight who the frequent individual contributers are which is difficult to do as it stands now. 
 
