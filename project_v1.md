@@ -135,8 +135,8 @@ data = process_map('aurora_il.osm', True)
 
 ### Size of Files:
 
-aurora_il.osm : 169.9 MB
-aurora_il.osm.json : 220.6 MB
+>aurora_il.osm : 169.9 MB
+>aurora_il.osm.json : 220.6 MB
 ### Number of Unique Users:
 > db.aurora_il.distinct('created.user').length
 
@@ -253,11 +253,14 @@ if __name__ == '__main__':
 ## 5. Other Ideas About the Data Set:
 
 The data set could be improved by making bulk inputted data easier to filter out. Bots and automatic data dumps are very present in the data set as can be seen above. Elements from National Hydrography Dataset (NHD) were dumped in this case mainly by alexrudd(NHD) but only discovered after close investigation. Also, Topologically Integrated Geographic Encoding and Referencing data (tiger) data is spread throughout the data set. (See below for queries). While this data is important to some, it takes away the importance of user inputted data. I think focusing on user-inputted data, and highlighting its existence would help improve the data.
+
 > db.aurora_il.find({"NHD:way_id":{"$exists":1}}).count()
 
+Result:
 815
 > db.aurora_il.find({"tiger:reviewed":{"$exists":1}}).count()
 
+Result:
 14335
 ## 6. Conclusion:
 
