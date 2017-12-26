@@ -136,6 +136,7 @@ data = process_map('aurora_il.osm', True)
 ### Size of Files:
 
 >aurora_il.osm : 169.9 MB
+
 >aurora_il.osm.json : 220.6 MB
 ### Number of Unique Users:
 > db.aurora_il.distinct('created.user').length
@@ -254,6 +255,9 @@ if __name__ == '__main__':
 
 The data set could be improved by making bulk inputted data easier to filter out. Bots and automatic data dumps are very present in the data set as can be seen above. Elements from National Hydrography Dataset (NHD) were dumped in this case mainly by alexrudd(NHD) but only discovered after close investigation. Also, Topologically Integrated Geographic Encoding and Referencing data (tiger) data is spread throughout the data set. (See below for queries). While this data is important to some, it takes away the importance of user inputted data. I think focusing on user-inputted data, and highlighting its existence would help improve the data.
 
+Some of the benefits from focusing on user-inputted data would be that there is a 'human in the loop' when tagging nodes. Lots of the automated data dumps are unvalidated. Taken directly from the OpenSteet Map Wiki, "An initial run took place in 2005, but unfortunately had to be shut off, and data purged, in November 2006 due to data integrity problems." This shows how damaging automated data dumps can be to openly contributed data sources. Introducing, a 'human in the loop' would help limit this corruption. However on the other hand, focusing on user-inputted data would mean higher levels of inconsistency when it comes to the XML structure. There are ways to limit this, but ultimately user data is dirty. With that being said though, dirty human data is easier to correct then damaging data dumps en-masse.
+
+
 > db.aurora_il.find({"NHD:way_id":{"$exists":1}}).count()
 
 Result:
@@ -281,3 +285,6 @@ https://www.youtube.com/watch?v=JyX6j00Q2Cg&feature=youtu.be
 #### MongoDB Documentation
 
 https://docs.mongodb.com/
+
+#### OpenStreetMap Wiki
+http://wiki.openstreetmap.org/wiki/TIGER
